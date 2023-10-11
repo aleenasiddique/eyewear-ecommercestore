@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Merriweather:wght@700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,3 +16,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+*{
+  box-sizing: border-box; 
+}
+ @layer components{
+  .first-nav::after {
+    @apply absolute content-[''] bg-black h-[1px] w-[0%] left-0 -bottom-2 rounded-xl duration-300
+  }
+  .first-nav:hover::after {
+    @apply w-[100%]
+}
+ }
