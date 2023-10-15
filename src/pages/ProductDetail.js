@@ -4,21 +4,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowAltCircleLeft} from "@fortawesome/free-solid-svg-icons"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import productData from "../data.js"
-export default function ProductDetail (){
-    const [itemsCount, setItemsCount] = React.useState(0)
-    function addCount({}){  
-        if( itemsCount < 20){
-     setItemsCount(prevCount =>prevCount + 1)}
-    }
-    function minusCount(){
-        if(itemsCount > 0 ){
-        setItemsCount(prevCount =>prevCount - 1)}
-       }
+export default function ProductDetail ({cart, addToCart, quantity, setQuantity}){
+  const[count, setCount] = React.useState(1)
     const {id} = useParams()
     const collection = productData.data.product
     const product = collection.find(product => product.id === id)
      const navigate= useNavigate()
-
+      
+     function handleAddToCart(){
+      addToCart(product)
+      product.quantity = count
+      setQuantity(prevQuantity => prevQuantity + count )
+     }
+     console.log(quantity)
+       function addQuantity(){
+        if(count < 20 ){
+          setCount(prevCount => prevCount + 1 )
+        }
+       }
+       function subtractQuantity(){
+        if(count > 0 ){
+          setCount(prevCount => prevCount - 1 )
+        }
+       }
     return (
         <div>
         <div className="my-[100px] mx-12 md:mx-[100px]">
@@ -42,16 +50,16 @@ export default function ProductDetail (){
             <FontAwesomeIcon icon={faStar} className="text-yellow-300"/>
             <FontAwesomeIcon icon={faStar} className="text-yellow-300"/>
           </i>
-          <div className="flex border border-zinc-300 items-center justify-between w-[130px] text-2xl">
-            <button className="pl-3 hover:font-bold" onClick={minusCount}>-</button>
-            <p className=" border-x border-zinc-300 px-6 py-0">{itemsCount}</p>
-            <button className="pr-3 hover:font-bold" onClick={addCount}>+</button>
-            </div>
-
-          <NavLink to="." className="py-2 w-[150px] text-center border border-black hover:bg-black hover:text-white mt-2">Add to Cart</NavLink>
+          <div className="flex justify-evenly items-center w-[150px] border border-zinc-400 font-2xl mt-2 font-bold">
+           <button className="border-r border-zinc-400 pr-4 py-1" onClick={addQuantity}>+</button>
+            < div className="py-1">{count}</div>
+           <button className="border-l border-zinc-400 pl-4 py-1" onClick={subtractQuantity}>-</button>
+          </div>
+          <NavLink to="/cart" className="py-2 w-[150px] text-center border border-black hover:bg-black hover:text-white mt-2 transition-colors ease-in-out duration-300" onClick={handleAddToCart} >Add to Cart</NavLink>
             </div> 
        </div>
        </div>
+       
        </div>
     )     
             

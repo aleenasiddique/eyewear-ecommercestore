@@ -12,18 +12,29 @@ import ProductDetail from './pages/ProductDetail'
 import ShoppingCart from './pages/ShoppingCart'
 
 function App() {
+  const [cart, setCart] = React.useState(JSON.parse(localStorage.getItem("cart")) || [])
 
+  function addToCart(product){
+   setCart([...cart, product])
+  }
+  const[quantity, setQuantity] = React.useState(JSON.parse(localStorage.getItem("quantity")) || 0)
+  const[total, setTotal] = React.useState(JSON.parse(localStorage.getItem("total")) || 0)
+  React.useEffect(()=> {
+    localStorage.setItem("cart", JSON.stringify(cart))
+    localStorage.setItem("quantity", JSON.stringify(quantity))
+    localStorage.setItem("total", JSON.stringify(total))
+      }, [cart, quantity, total])
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout quantity={quantity}/>}>
       <Route index element={<Home />} />
       <Route path="shop" element={<Glasses />} />
       <Route path="men" element={<Men />} />
       <Route path="women" element={<Women />} />
       <Route path="about" element={<About />} />
-      <Route path="cart" element={<ShoppingCart />} />
-      <Route path="shop/:id" element={<ProductDetail />} />
+      <Route path="cart" element={<ShoppingCart cart={cart} setCart={setCart} quantity={quantity} setQuantity={setQuantity} total={total} setTotal={setTotal}/>} />
+      <Route path="shop/:id" element={<ProductDetail cart={cart} addToCart={addToCart} quantity={quantity} setQuantity={setQuantity}/>}/>
       </Route>
     </Routes>
     </BrowserRouter>
@@ -36,5 +47,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-

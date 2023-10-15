@@ -3,10 +3,10 @@ import Header from "./Header"
 import Footer from "./Footer"
 import Shipping from "./Shipping"
 
-export default function Layout(){
+export default function Layout({quantity}){
     return (
         <div className="scroll-smooth">
-        <Header />
+        <Header quantity={quantity}/>
         <main>
             <Outlet />
         </main>

@@ -5,7 +5,7 @@ import { faBasketShopping } from "@fortawesome/free-solid-svg-icons"
 
 
 
-export default function Header (){
+export default function Header ({quantity}){
     const [isOpen, setIsOpen] = React.useState(false)
     function toggleMobileMenu(){
         setIsOpen(prevMenu => !prevMenu)
@@ -18,7 +18,7 @@ export default function Header (){
     return (
         <header>
          
-       <nav className=" hidden md:flex w-screen h-[90px] px-12 top-2 border-y border-pink-100 bg-purple-100">
+       <nav className=" hidden md:flex  h-[90px] px-12 top-2 border-y border-pink-100 bg-purple-100">
         <div className="flex flex-1 justify-start mr-auto gap-4 lg:gap-8 text-sm lg:base items-center text-zinc-600 font-bold">
          <NavLink to="/" className={ ({isActive}) => isActive ? "text-black font-bold" : "relative first-nav hover:text-black"}>HOME</NavLink>
          <NavLink to="about" className={ ({isActive}) => isActive ? "text-black font-bold" : "relative first-nav hover:text-black hidden lg:block"}>ABOUT US</NavLink>
@@ -30,8 +30,8 @@ export default function Header (){
         <NavLink to="/" className="mx-4 mt-4"><span className="font-font-weather text-3xl font-bold">Riccardo</span> <span className="block text-center mt-[-2px] text-zinc-600 text-sm">EYEWEAR</span></NavLink>
         <div className="flex flex-1 justify-end ml-auto gap-4 lg:gap-8 text-sm lg:base items-center">
             <div className="relative">
-            <NavLink to="."><i className="text-2xl">{<FontAwesomeIcon  icon={faBasketShopping}/>}</i></NavLink>
-            <div className="flex items-center justify-center absolute w-[14px] h-[14px] rounded-[7px] bg-black text-white text-[9px] -top-[2px] left-[6px]"><p>0</p></div>
+            <NavLink to="/cart"><i className="text-2xl">{<FontAwesomeIcon  icon={faBasketShopping}/>}</i></NavLink>
+            <div className="flex items-center justify-center absolute w-[14px] h-[14px] rounded-[7px] bg-black text-white text-[9px] -top-[2px] left-[6px]"><p>{quantity}</p></div>
             </div>
             <NavLink to="/" className="py-3 px-10 border border-black font-semibold hover:text-pink-300 hover:border-pink-300 transition-colors ease-in-out duration-300">LOG IN</NavLink>
         </div>
@@ -40,8 +40,8 @@ export default function Header (){
        <NavLink to="/" className=""><span className="font-font-weather text-lg font-bold">Riccardo</span> <span className="block text-center mt-[-2px] text-zinc-600 text-[9px]">EYEWEAR</span></NavLink>
       <div className="flex gap-4 items-center">
         <div className="relative"> 
-      <NavLink to="."><i className="text-2xl mb-[80px]">{<FontAwesomeIcon  icon={faBasketShopping}/>}</i></NavLink>
-      <div className="flex items-center justify-center absolute w-[14px] h-[14px] rounded-[7px] bg-black text-white text-[9px] -top-[2px] left-[6px]"><p>0</p></div> 
+      <NavLink to="/cart"><i className="text-2xl mb-[80px]">{<FontAwesomeIcon  icon={faBasketShopping}/>}</i></NavLink>
+      <div className="flex items-center justify-center absolute w-[14px] h-[14px] rounded-[7px] bg-black text-white text-[9px] -top-[2px] left-[6px]"><p>{quantity}</p></div> 
       </div>
        <div onClick={toggleMobileMenu} >
        <div className={`bg-black  relative  rounded-full w-8 h-1 transition-all ease-in-out  duration-200
