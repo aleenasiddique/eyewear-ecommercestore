@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowAltCircleLeft} from "@fortawesome/free-solid-svg-icons"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import productData from "../data.js"
-export default function ProductDetail ({cart, addToCart, quantity, setQuantity}){
+export default function ProductDetail ({addToCart, setQuantity}){
   const[count, setCount] = React.useState(1)
     const {id} = useParams()
     const collection = productData.data.product
@@ -12,11 +12,10 @@ export default function ProductDetail ({cart, addToCart, quantity, setQuantity})
      const navigate= useNavigate()
       
      function handleAddToCart(){
-      addToCart(product)
-      product.quantity = count
+      addToCart({...product, quantity:count})
       setQuantity(prevQuantity => prevQuantity + count )
+      setCount(1)
      }
-     console.log(quantity)
        function addQuantity(){
         if(count < 20 ){
           setCount(prevCount => prevCount + 1 )
@@ -30,9 +29,9 @@ export default function ProductDetail ({cart, addToCart, quantity, setQuantity})
     return (
         <div>
         <div className="my-[100px] mx-12 md:mx-[100px]">
-        <NavLink to="#" onClick={() => navigate(-1)} className="flex items-center gap-2"> 
+        <NavLink to="#" onClick={() => navigate(-1)} className="flex items-center gap-2 text-dark-green"> 
         <FontAwesomeIcon icon={faArrowAltCircleLeft} className="black text-3xl align-bottom"/>
-        <span className="text-lg hover:underline underline-offset-2 font-semibold">Back to Product Page</span>
+        <span className="text-lg hover:underline underline-offset-2 font-bold">Back to Product Page</span>
         </NavLink>
         <div className="flex flex-wrap justify-center gap-10 md:gap-16 mt-16">
           <img src={product.imageUrl} className="h-[360px] md:h-[550px] w-[330px] md:w-[450px] object-cover rounded-lg" alt={product.name} />
@@ -41,21 +40,21 @@ export default function ProductDetail ({cart, addToCart, quantity, setQuantity})
                 comfort and timeless elegance in every pair. Our glasses blend fashion and function seamlessly, featuring high-quality materials and expert craftsmanship.
                  Whether you're looking for a sophisticated look for formal occasions or a chic everyday accessory, our diverse range offers something for everyone.
                   Explore our eyewear selection and find the perfect pair that complements your individuality and leaves a lasting impression.</p>
-                  <p className="text-xl font-bold">{product.name}</p>
+                  <p className="text-xl font-extrabold text-dark-green">{product.name}</p>
                   <p className="text-xl italic">{product.type}'s Eyewear</p>
-                  <p className="text-lg font-bold">${product.price}</p>
+                  <p className=" font-extrabold text-dark-green">${product.price}</p>
                  <i> <FontAwesomeIcon icon={faStar} className="text-yellow-300"/>
             <FontAwesomeIcon icon={faStar} className="text-yellow-300"/>
             <FontAwesomeIcon icon={faStar} className="text-yellow-300"/>
             <FontAwesomeIcon icon={faStar} className="text-yellow-300"/>
             <FontAwesomeIcon icon={faStar} className="text-yellow-300"/>
           </i>
-          <div className="flex justify-evenly items-center w-[150px] border border-zinc-400 font-2xl mt-2 font-bold">
+          <div className="flex justify-evenly items-center w-[150px] border border-zinc-400 font-2xl mt-2 font-extrabold text-dark-green">
            <button className="border-r border-zinc-400 pr-4 py-1" onClick={addQuantity}>+</button>
             < div className="py-1">{count}</div>
            <button className="border-l border-zinc-400 pl-4 py-1" onClick={subtractQuantity}>-</button>
           </div>
-          <NavLink to="/cart" className="py-2 w-[150px] text-center border border-black hover:bg-black hover:text-white mt-2 transition-colors ease-in-out duration-300" onClick={handleAddToCart} >Add to Cart</NavLink>
+          <NavLink to="/cart" className="py-2 w-[150px] text-center bg-dark-green shadow-md shadow-dark-green hover:bg-teal-900 text-zinc-100 mt-2 transition-colors ease-in-out duration-300" onClick={handleAddToCart} >Add to Cart</NavLink>
             </div> 
        </div>
        </div>

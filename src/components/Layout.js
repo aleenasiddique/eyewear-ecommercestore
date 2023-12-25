@@ -5,7 +5,7 @@ import Shipping from "./Shipping"
 
 export default function Layout({quantity}){
     return (
-        <div className="scroll-smooth">
+        <div className="bg-light-pink">
         <Header quantity={quantity}/>
         <main>
             <Outlet />
