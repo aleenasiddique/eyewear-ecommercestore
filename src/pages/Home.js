@@ -141,7 +141,7 @@ export default function Home(){
                     <NavLink  to="/about" className=" mb-8 font-bold py-3 text-center px-8 text-zinc-100 bg-dark-green shadow-md shadow-dark-green hover:bg-teal-900 transition-colors ease-in-out duration-300">READ MORE</NavLink>
               </motion.div>
               </motion.div>
-              <img src={homeImage2} className="w-[330px] md:w-[500px] h-[400px] md:h-[500px]" />
+              <img src={homeImage2} className="w-[330px] md:w-[500px] h-[400px] md:h-[500px] mt-6" />
             </div>
         </div>
     )
